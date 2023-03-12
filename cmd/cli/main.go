@@ -10,7 +10,7 @@ import (
 
 const version = "1.0.0"
 
-var cel django.Django
+var dj django.Django
 
 func main() {
 	var message string

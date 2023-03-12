@@ -8,9 +8,9 @@ func doAuth() error {
 	checkForDB()
 
 	// migrations
-	dbType := cel.DB.DataType
+	dbType := dj.DB.DataType
 
-	tx, err := cel.PopConnect()
+	tx, err := dj.PopConnect()
 	if err != nil {
 		exitGracefully(err)
 	}
@@ -26,74 +26,74 @@ func doAuth() error {
 		exitGracefully(err)
 	}
 
-	err = cel.CreatePopMigration(upBytes, downBytes, "auth", "sql")
+	err = dj.CreatePopMigration(upBytes, downBytes, "auth", "sql")
 	if err != nil {
 		exitGracefully(err)
 	}
 
 	// run migrations
-	err = cel.RunPopMigrations(tx)
+	err = dj.RunPopMigrations(tx)
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/data/user.go.txt", cel.RootPath + "/data/user.go")
+	err = copyFilefromTemplate("templates/data/user.go.txt", dj.RootPath + "/data/user.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/data/token.go.txt", cel.RootPath + "/data/token.go")
+	err = copyFilefromTemplate("templates/data/token.go.txt", dj.RootPath + "/data/token.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/data/remember_token.go.txt", cel.RootPath + "/data/remember_token.go")
+	err = copyFilefromTemplate("templates/data/remember_token.go.txt", dj.RootPath + "/data/remember_token.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
 	// copy over middleware
-	err = copyFilefromTemplate("templates/middleware/auth.go.txt", cel.RootPath + "/middleware/auth.go")
+	err = copyFilefromTemplate("templates/middleware/auth.go.txt", dj.RootPath + "/middleware/auth.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/middleware/auth-token.go.txt", cel.RootPath + "/middleware/auth-token.go")
+	err = copyFilefromTemplate("templates/middleware/auth-token.go.txt", dj.RootPath + "/middleware/auth-token.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/middleware/remember.go.txt", cel.RootPath + "/middleware/remember.go")
+	err = copyFilefromTemplate("templates/middleware/remember.go.txt", dj.RootPath + "/middleware/remember.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/handlers/auth-handlers.go.txt", cel.RootPath + "/handlers/auth-handlers.go")
+	err = copyFilefromTemplate("templates/handlers/auth-handlers.go.txt", dj.RootPath + "/handlers/auth-handlers.go")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/mailer/password-reset.html.tmpl", cel.RootPath + "/mail/password-reset.html.tmpl")
+	err = copyFilefromTemplate("templates/mailer/password-reset.html.tmpl", dj.RootPath + "/mail/password-reset.html.tmpl")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/mailer/password-reset.plain.tmpl", cel.RootPath + "/mail/password-reset.plain.tmpl")
+	err = copyFilefromTemplate("templates/mailer/password-reset.plain.tmpl", dj.RootPath + "/mail/password-reset.plain.tmpl")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/views/login.jet", cel.RootPath + "/views/login.jet")
+	err = copyFilefromTemplate("templates/views/login.jet", dj.RootPath + "/views/login.jet")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/views/forgot.jet", cel.RootPath + "/views/forgot.jet")
+	err = copyFilefromTemplate("templates/views/forgot.jet", dj.RootPath + "/views/forgot.jet")
 	if err != nil {
 		exitGracefully(err)
 	}
 
-	err = copyFilefromTemplate("templates/views/reset-password.jet", cel.RootPath + "/views/reset-password.jet")
+	err = copyFilefromTemplate("templates/views/reset-password.jet", dj.RootPath + "/views/reset-password.jet")
 	if err != nil {
 		exitGracefully(err)
 	}

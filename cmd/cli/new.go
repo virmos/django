@@ -30,9 +30,9 @@ func doNew(appName string) {
 	// git clone the skeleton application
 	color.Green("\tCloning repository...")
 	_, err := git.PlainClone("./"+appName, false, &git.CloneOptions{
-		// URL: "git@github.com:tsawler/Django-app.git",
+		// URL: "git@github.com:virmos/django-app.git",
+		URL: "https://github.com/tsawler/celeritas-app.git",
 		// URL: "https://github.com/virmos/django-app.git",
-		URL: "https://github.com/virmos/django.git",
 		Progress: os.Stdout,
 		Depth: 1,
 	})
@@ -55,7 +55,7 @@ func doNew(appName string) {
 
 	env := string(data)
 	env = strings.ReplaceAll(env, "${APP_NAME}", appName)
-	env = strings.ReplaceAll(env, "${KEY}", cel.RandomString(32))
+	env = strings.ReplaceAll(env, "${KEY}", dj.RandomString(32))
 
 	err = copyDataToFile([]byte(env), fmt.Sprintf("./%s/.env", appName))
 	if err != nil {

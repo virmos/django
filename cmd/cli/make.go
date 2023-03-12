@@ -2,24 +2,25 @@ package main
 
 import (
 	"errors"
+	"io/ioutil"
+	"strings"
+
 	"github.com/fatih/color"
 	"github.com/gertd/go-pluralize"
 	"github.com/iancoleman/strcase"
-	"io/ioutil"
-	"strings"
 )
 
 func doMake(arg2, arg3, arg4 string) error {
 
 	switch arg2 {
 	case "key":
-		rnd := cel.RandomString(32)
+		rnd := dj.RandomString(32)
 		color.Yellow("32 character encryption key: %s", rnd)
 
 	case "migration":
 		checkForDB()
 
-		//dbType := cel.DB.DataType
+		//dbType := dj.DB.DataType
 		if arg3 == ""{
 			exitGracefully(errors.New("you must give the migration a name"))
 		}
@@ -41,7 +42,7 @@ func doMake(arg2, arg3, arg4 string) error {
 
 		// create the migrations for either fizz or sql
 
-		err := cel.CreatePopMigration([]byte(up), []byte(down), arg3, migrationType)
+		err := dj.CreatePopMigration([]byte(up), []byte(down), arg3, migrationType)
 		if err != nil {
 			exitGracefully(err)
 		}
@@ -57,7 +58,7 @@ func doMake(arg2, arg3, arg4 string) error {
 			exitGracefully(errors.New("you must give the handler a name"))
 		}
 
-		fileName := cel.RootPath + "/handlers/" + strings.ToLower(arg3) + ".go"
+		fileName := dj.RootPath + "/handlers/" + strings.ToLower(arg3) + ".go"
 		if fileExists(fileName) {
 			exitGracefully(errors.New(fileName + " already exists!"))
 		}
@@ -99,7 +100,7 @@ func doMake(arg2, arg3, arg4 string) error {
 			tableName= strings.ToLower(plur.Plural(arg3))
 		}
 
-		fileName := cel.RootPath + "/data/" + strings.ToLower(modelName) + ".go"
+		fileName := dj.RootPath + "/data/" + strings.ToLower(modelName) + ".go"
 		if fileExists(fileName) {
 			exitGracefully(errors.New(fileName + " already exists!"))
 		}
@@ -116,8 +117,8 @@ func doMake(arg2, arg3, arg4 string) error {
 		if arg3 == "" {
 			exitGracefully(errors.New("you must give the mail template a name"))
 		}
-		htmlMail := cel.RootPath + "/mail/" + strings.ToLower(arg3) + ".html.tmpl"
-		plainMail := cel.RootPath + "/mail/" + strings.ToLower(arg3) + ".plain.tmpl"
+		htmlMail := dj.RootPath + "/mail/" + strings.ToLower(arg3) + ".html.tmpl"
+		plainMail := dj.RootPath + "/mail/" + strings.ToLower(arg3) + ".plain.tmpl"
 
 		err := copyFilefromTemplate("templates/mailer/mail.html.tmpl", htmlMail)
 		if err != nil {
