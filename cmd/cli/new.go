@@ -31,8 +31,8 @@ func doNew(appName string) {
 	color.Green("\tCloning repository...")
 	_, err := git.PlainClone("./"+appName, false, &git.CloneOptions{
 		// URL: "git@github.com:virmos/django-app.git",
-		URL: "https://github.com/tsawler/celeritas-app.git",
-		// URL: "https://github.com/virmos/django-app.git",
+		// URL: "https://github.com/virmos/django-app-full.git",
+		URL: "https://github.com/virmos/django-app.git",
 		Progress: os.Stdout,
 		Depth: 1,
 	})
