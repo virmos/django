@@ -12,10 +12,10 @@ coverage:
 
 ## build_cli: builds the command line tool Django and copies it to myapp
 build_cli:
-	@go build -o ../myapp/Django ./cmd/cli
+	@go build -o ../myapp/django ./cmd/cli
 
 ## build: builds the command line tool dist directory
 build:
 # @go build -o ./dist/Django ./cmd/cli
 # windows users should delete the line above this one, and use the line below instead (uncommented)
-	@go build -o dist/Django.exe ./cmd/cli
+	@go build -o dist/django.exe ./cmd/cli
