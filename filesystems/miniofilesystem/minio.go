@@ -29,6 +29,7 @@ func (m *Minio) getCredentials() *minio.Client {
 	client, err := minio.New(m.Endpoint, &minio.Options{
 		Creds: credentials.NewStaticV4(m.Key, m.Secret, ""),
 		Secure: m.UseSSL,
+		Region: m.Region,
 	})
 	if err != nil {
 		log.Println(err)
